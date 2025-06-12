@@ -1,9 +1,9 @@
+using Cli.Infrastructure.Commands.Helpers;
 using Cli.Infrastructure.Commands.Settings;
 using Cli.Infrastructure.Services.GoodHttpClient;
 using Microsoft.Extensions.Hosting;
 using Spectre.Console;
 using Spectre.Console.Cli;
-using Spectre.Console.Json;
 
 namespace Cli.Infrastructure.Commands;
 
@@ -25,15 +25,7 @@ internal sealed class GoodHttpClientCommand(IGoodHttpClientService service, IHos
 		{
 			for (int i = 0; i < settings.Count; i++)
 			{
-				AnsiConsole.MarkupLine($"Current attempt [green]{i}[/] started!");
-
-				var result = await service.Send(token);
-				httpResponseMessages.Add(result);
-
-				AnsiConsole.WriteLine(await result.Content.ReadAsStringAsync(token));
-
-				AnsiConsole.Write(new JsonText(await result.Content.ReadAsStringAsync(token)));
-				AnsiConsole.WriteLine();
+				httpResponseMessages.Add(await CommandHelpers.ExecuteSend(service.Send, i, token));
 			}
 
 			AnsiConsole

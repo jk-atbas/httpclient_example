@@ -8,6 +8,11 @@ using Spectre.Console.Json;
 
 namespace Cli.Infrastructure.Commands;
 
+/// <summary>
+/// Command thats supposed to cause an socket exception
+/// </summary>
+/// <param name="settings">Appsettings</param>
+/// <param name="lifetime">Host lifetime</param>
 internal class ExhaustionCommand(IOptionsMonitor<AppSettings> settings, IHostApplicationLifetime lifetime)
 	: AsyncCommand
 {
@@ -17,7 +22,11 @@ internal class ExhaustionCommand(IOptionsMonitor<AppSettings> settings, IHostApp
 		using var httpClient = new HttpClient();
 
 		var result = (await Enumerable.Range(0, 10000)
-			.GetParallelResults(this.SendRequest, this.OnError, concurrencyLimit: 1000, cancellationToken: lifetime.ApplicationStopping))
+			.GetParallelResults(
+				this.SendRequest,
+				this.OnError,
+				concurrencyLimit: 1000,
+				cancellationToken: lifetime.ApplicationStopping))
 			.OfType<HttpResponseMessage>();
 
 		AnsiConsole

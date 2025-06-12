@@ -2,8 +2,23 @@ using System.Collections.Concurrent;
 
 namespace Cli.Infrastructure.Extensions;
 
+/// <summary>
+/// Parallel extensions
+/// </summary>
 internal static class ParallelProviderExtensions
 {
+	/// <summary>
+	/// Produces a value for each individual element in a collection
+	/// </summary>
+	/// <typeparam name="TSource">Source type</typeparam>
+	/// <typeparam name="TResult">Result type</typeparam>
+	/// <param name="source">Source collection</param>
+	/// <param name="resultsSeed">Result delegate</param>
+	/// <param name="onErrorAction">Error delegate</param>
+	/// <param name="throwOnError">Throw on exception</param>
+	/// <param name="concurrencyLimit">Degree of Parallelism</param>
+	/// <param name="cancellationToken">Cancellation token</param>
+	/// <returns>A collection of result type</returns>
 	public static async Task<TResult?[]> GetParallelResults<TSource, TResult>(
 	   this IEnumerable<TSource> source,
 	   Func<TSource, CancellationToken, Task<TResult?>> resultsSeed,

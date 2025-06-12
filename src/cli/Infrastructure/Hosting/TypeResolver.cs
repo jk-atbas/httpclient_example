@@ -2,6 +2,7 @@ using Microsoft.Extensions.Hosting;
 using Spectre.Console.Cli;
 
 namespace Cli.Infrastructure.Hosting;
+
 /// <summary>
 /// Integration for a .NET generic host
 /// </summary>

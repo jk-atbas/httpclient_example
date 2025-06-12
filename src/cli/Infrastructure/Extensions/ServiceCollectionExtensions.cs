@@ -6,8 +6,17 @@ using System.Threading.RateLimiting;
 
 namespace Cli.Infrastructure.Extensions;
 
+/// <summary>
+/// Service collection extensions
+/// </summary>
 internal static class ServiceCollectionExtensions
 {
+	/// <summary>
+	/// Adds a resilience handler
+	/// </summary>
+	/// <param name="builder">Http client builder</param>
+	/// <param name="identifier">Identifier</param>
+	/// <returns>Client builder</returns>
 	public static IHttpClientBuilder AddResilience(this IHttpClientBuilder builder, string identifier)
 	{
 		_ = builder.AddResilienceHandler($"pipeline-{identifier}", (handler, context) =>

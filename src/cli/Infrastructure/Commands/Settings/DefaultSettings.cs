@@ -2,6 +2,7 @@ using Spectre.Console.Cli;
 using System.ComponentModel;
 
 namespace Cli.Infrastructure.Commands.Settings;
+
 /// <summary>
 /// Default settings template
 /// </summary>

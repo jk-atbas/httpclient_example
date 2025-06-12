@@ -44,18 +44,18 @@ internal class Program
 				.WithExample("g", "--count", "5");
 
 			_ = config.AddCommand<ExhaustionCommand>("exhaust")
-				.WithAlias("eh");
+				.WithAlias("eh")
+				.WithDescription("Causes socket exhaustion")
+				.WithExample("eh");
 
 			_ = config.AddCommand<BadHttpClientCommand>("bad")
-				.WithAlias("b");
+				.WithAlias("b")
+				.WithDescription("Bad example for http resilience")
+				.WithExample("bad", "-c", "5")
+				.WithExample("g", "--count", "5");
 		});
 
 		_ = await app.RunAsync(args);
-
-		var currentHost = registrar.GetCurrentHost();
-		var lifetime = currentHost.Services.GetRequiredService<IHostApplicationLifetime>();
-
-		await currentHost.RunAsync(lifetime.ApplicationStopping);
 	}
 
 	private static IHostBuilder CreateHostBuilder(string[] args, IConfiguration appsettingsBuilder)

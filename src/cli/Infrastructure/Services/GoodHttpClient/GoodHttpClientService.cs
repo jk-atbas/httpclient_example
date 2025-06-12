@@ -2,6 +2,7 @@ using Cli.Infrastructure.Settings;
 using Microsoft.Extensions.Options;
 
 namespace Cli.Infrastructure.Services.GoodHttpClient;
+
 /// <summary>
 /// Represents a good http endpoint request
 /// </summary>
