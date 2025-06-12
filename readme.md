@@ -51,3 +51,13 @@ Cause a socket exhaustion
 ```pwsh
 ./Cli eh
 ```
+
+## Technologies used
+
+- EnvironmentAbstractions
+- Microsoft.Extensions.Configuration
+- Microsoft.Extensions.Hosting
+- Microsoft.Extensions.Http
+- Microsoft.Extensions.Options
+- Spectre.Console.Cli
+- StyleCop.Analyzers
